@@ -1,3 +1,4 @@
+
 public class TaskTracker {
 
     public static void main(String[] Args) {
@@ -7,10 +8,34 @@ public class TaskTracker {
             return;
         }
 
+        TaskHandler taskHandler = new TaskHandler();
+
         String Command = Args[0];
 
-        System.out.println(Command);
+       switch (Command.toLowerCase()) {
 
+           case "add":
+               taskHandler.addTask();
+               break;
+           case "delete":
+               System.out.println("deleted");
+               break;
+           case "update":
+               System.out.println("updated");
+               break;
+           case "mark-in-progress":
+               System.out.println("in progress");
+               break;
+           case "mark-done":
+               System.out.println("mark-done");
+               break;
+           case "list":
+               System.out.println("list");
+               break;
+           default:
+               System.out.println("POOP!");
+               break;
+       }
     }
 
 }

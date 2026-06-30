@@ -15,7 +15,12 @@ public class TaskTracker {
        switch (Command.toLowerCase()) {
 
            case "add":
-               taskHandler.addTask();
+               if (Args.length == 2) {
+                   taskHandler.addTask(Args[1]);
+               } else {
+                   System.out.println("java TaskTracker add <Task Name>");
+               }
+
                break;
            case "delete":
                System.out.println("deleted");

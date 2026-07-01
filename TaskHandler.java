@@ -35,7 +35,7 @@ public class TaskHandler {
         Task task = getTask(id,tasks);
 
         if (task == null) {
-            System.out.println("Task of id " + id + "doesnt exist!");
+            System.out.println("Task of id " + id + " doesnt exist!");
             return;
         }
 
@@ -51,7 +51,7 @@ public class TaskHandler {
         Task task = getTask(id,tasks);
 
         if (task == null) {
-            System.out.println("Task of id " + id + "doesnt exist!");
+            System.out.println("Task of id " + id + " doesnt exist!");
             return;
         }
 
@@ -68,7 +68,7 @@ public class TaskHandler {
         Task task = getTask(id,tasks);
 
         if (task == null) {
-            System.out.println("Task of id " + id + "doesnt exist!");
+            System.out.println("Task of id " + id + " doesnt exist!");
             return;
         }
 
@@ -139,6 +139,11 @@ public class TaskHandler {
                 String[] data = string.split(":");
 
                 Integer id = Integer.parseInt(String.valueOf(data[1]));
+
+                if (id == 0) {
+                    continue;
+                }
+
                 String description = data[3];
                 String status = data[5];
                 String createdAt = data[7];

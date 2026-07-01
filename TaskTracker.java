@@ -3,6 +3,7 @@ public class TaskTracker {
 
     public static void main(String[] Args) {
 
+        //make sure there is a command
         if (Args.length < 1) {
             System.out.println("java TaskTracker <Command>");
             return;

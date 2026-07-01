@@ -14,12 +14,19 @@ public class TaskHandler {
 
     void addTask(String description) {
 
+        //Get the arraylist of tasks
         ArrayList<Task> tasks = getTasks();
 
+        //Makes sure the "" are removed
         description = description.replace("\"","");
+
+        //Get current date and time
         LocalDateTime dateTime = LocalDateTime.now();
+
+        //Get highest id from task list and top it by 1 to create newer id
         Integer NewID = getLastID(tasks)+1;
 
+        //Create new task object and insert it to the current list
         Task newTask = new Task(NewID,description,"todo",String.valueOf(dateTime),String.valueOf(dateTime));
         tasks.add(newTask);
 
@@ -31,6 +38,7 @@ public class TaskHandler {
 
     void removeTask (Integer id) {
 
+        //Removes the task class of id from the tasks arraylist
         ArrayList<Task> tasks = getTasks();
         Task task = getTask(id,tasks);
 
@@ -46,6 +54,7 @@ public class TaskHandler {
 
     void update (Integer id, String description) {
 
+        //Update the description of the task class
         description = description.replace("\"","");
         ArrayList<Task> tasks = getTasks();
         Task task = getTask(id,tasks);
@@ -63,6 +72,7 @@ public class TaskHandler {
 
     void status (Integer id, String status) {
 
+        //Update the status of the task class
         status = status.replace("\"","");
         ArrayList<Task> tasks = getTasks();
         Task task = getTask(id,tasks);
@@ -80,6 +90,7 @@ public class TaskHandler {
 
     void List (String status) {
 
+        //Make sure the status is actually valid
         if (!status.equals("todo") && !status.equals("done") && !status.equals("in-progress") && !status.equals("All")) {
             System.out.println(status + " is not a valid status");
             return;
@@ -131,9 +142,6 @@ public class TaskHandler {
 
             for (String string : split1){
 
-                //System.out.println("---");
-                //System.out.println(string);
-
                 //Split the task data by ,
 
                 String[] data = string.split(":");
@@ -149,6 +157,7 @@ public class TaskHandler {
                 String createdAt = data[7];
                 String updatedAt = data[9];
 
+                //Create new task object but with the data read from json
                 Task task = new Task(id,description,status,createdAt,updatedAt);
 
                 tasks.add(task);
@@ -165,18 +174,21 @@ public class TaskHandler {
 
     void saveToJson(ArrayList<Task> tasks) {
 
+        //Starting [ character
         String rawtext = "[\n";
 
         Integer ith = 1;
         for (Task task : tasks) {
 
+            //formating the task variables into text ready to be insertted into the json
             String data = String.format("{\"id\": %d, \"description\": \"%s\", \"status\": \"%s\", \"createdAt\": \"%s\", \"updatedAt\": \"%s\"}", task.id, task.description, task.status, task.createdAt, task.updatedAt);
-            //String data = "{\"id\": \"" + task.id + "\", " + "\"description\": \"" + task.description + "\", " + "\"status\": \"" + task.status + "\", " + "\"createdAt\": \"" + task.createdAt + "\", " + "\"updatedAt\": \"" + task.updatedAt;
 
+            //If its not the last task then add a , at the end
             if (ith < tasks.size()) {
                 data = data + ",";
             }
 
+            //new line
             data = data + "\n";
 
             rawtext = rawtext + data;

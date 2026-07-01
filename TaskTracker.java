@@ -73,7 +73,7 @@ public class TaskTracker {
                }
                break;
            default:
-               System.out.println("POOP!");
+               System.out.println("Not a valid command!");
                break;
        }
     }
